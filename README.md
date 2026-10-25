@@ -20,8 +20,6 @@ AIRA Business combines financial analytics with a conversational AI interface to
 
 ## Screenshots
 
-<img width="1917" height="912" alt="AIRA Business Command Center" src="https://github.com/user-attachments/assets/f57f453a-6416-4096-888d-7e54a5237d22" />
-
 <img width="810" height="742" alt="AIRA Business AI Assistant" src="https://github.com/user-attachments/assets/2c1e6933-e8ff-47ac-b59e-94f81835343c" />
 
 <img width="1580" height="907" alt="AIRA Business Financial Analytics" src="https://github.com/user-attachments/assets/b804b329-9412-4a62-bb51-cb4aec8c9ea7" />
