@@ -1,0 +1,16 @@
+import { useCallback, useEffect, useState } from "react";
+export function useApi(fn, deps = []) {
+  const [s, set] = useState({ data: null, loading: true, error: null });
+  const reload = useCallback(() => {
+    set((p) => ({ ...p, loading: true, error: null }));
+    fn().then((data) => set({ data, loading: false, error: null }))
+        .catch((e) => set({ data: null, loading: false, error: e.message }));
+  }, deps); // eslint-disable-line
+  useEffect(reload, [reload]);
+  return { ...s, reload };
+}
+export function useForm(initial) {
+  const [v, set] = useState(initial);
+  const bind = (k) => ({ value: v[k] ?? "", onChange: (e) => set({ ...v, [k]: e.target.value }) });
+  return [v, bind, set];
+}

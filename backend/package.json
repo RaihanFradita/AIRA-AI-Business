@@ -1,0 +1,16 @@
+{
+  "name": "nova-business-backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --env-file=../.env --watch src/index.ts",
+    "start": "bun --env-file=../.env src/index.ts",
+    "db:setup": "bun --env-file=../.env src/database/setup.ts"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.3.0",
+    "@elysiajs/jwt": "^1.3.0",
+    "elysia": "^1.3.0"
+  },
+  "devDependencies": { "@types/bun": "latest", "typescript": "^5.5.0" }
+}

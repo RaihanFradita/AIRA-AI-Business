@@ -1,0 +1,199 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --motion-fast: 140ms;
+  --motion-base: 220ms;
+  --motion-panel: 420ms;
+  --motion-ease: cubic-bezier(.2, .8, .2, 1);
+  --radius-card: 18px;
+}
+
+@theme {
+  --font-sans: Inter, "Segoe UI", system-ui, sans-serif;
+  --font-display: Sora, Inter, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", ui-monospace, monospace;
+
+  /* Light — "Daylight Lab" */
+  --color-surface-primary: #eef2f9;
+  --color-surface-secondary: #ffffff;
+  --color-surface-elevated: #f0f4fb;
+  --color-text-primary: #0b1730;
+  --color-text-secondary: #46566f;
+  --color-text-muted: #61708a;
+  --color-accent: #0a62e0;
+  --color-accent-2: #6a45f5;
+  --color-accent-hover: #0850b8;
+  --color-accent-foreground: #ffffff;
+  --color-accent-subtle: #e4eeff;
+  --color-border: #d3dcea;
+  --color-border-subtle: #e5ebf4;
+  --color-positive: #0a7f5e;
+  --color-positive-bg: #e1f5ed;
+  --color-negative: #bd2336;
+  --color-negative-bg: #fdebed;
+  --color-warning: #8f5c06;
+  --color-warning-bg: #fcf1dc;
+  --color-display: #0b1730;
+  --color-earth: #8f5c06;
+  --color-brand: #0b1730;
+  --color-text-on-brand: #ffffff;
+  --color-chart-1: #0a62e0;
+  --color-chart-2: #0a7f5e;
+  --color-chart-3: #b9770e;
+  --color-chart-4: #6a45f5;
+  --color-chart-5: #d33a52;
+  --color-chart-6: #0891b2;
+  --color-glow: rgba(10, 98, 224, .35);
+}
+
+@layer base {
+  .dark {
+    /* Dark — "Deep Space" */
+    --color-surface-primary: #050912;
+    --color-surface-secondary: #0b1322;
+    --color-surface-elevated: #131e34;
+    --color-text-primary: #e8eefc;
+    --color-text-secondary: #a3b3d1;
+    --color-text-muted: #8a9bbd;
+    --color-accent: #38d6ff;
+    --color-accent-2: #8b6cff;
+    --color-accent-hover: #7fe6ff;
+    --color-accent-foreground: #031018;
+    --color-accent-subtle: #0d2a3d;
+    --color-border: #1f2f4d;
+    --color-border-subtle: #16233d;
+    --color-positive: #34e0a1;
+    --color-positive-bg: #0e3027;
+    --color-negative: #ff7088;
+    --color-negative-bg: #3a1620;
+    --color-warning: #ffc24d;
+    --color-warning-bg: #382a10;
+    --color-display: #e8eefc;
+    --color-earth: #ffc24d;
+    --color-brand: #0b1322;
+    --color-text-on-brand: #e8eefc;
+    --color-chart-1: #38d6ff;
+    --color-chart-2: #34e0a1;
+    --color-chart-3: #ffc24d;
+    --color-chart-4: #8b6cff;
+    --color-chart-5: #ff7088;
+    --color-chart-6: #7aa7ff;
+    --color-glow: rgba(56, 214, 255, .38);
+    color-scheme: dark;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-surface-primary text-text-primary antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    min-width: 320px; font-size: 14px;
+    transition: background-color var(--motion-panel) var(--motion-ease), color var(--motion-base) var(--motion-ease);
+  }
+  h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -.01em; }
+  .tabular-nums { font-variant-numeric: tabular-nums; }
+  button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--color-accent); outline-offset: 2px;
+  }
+  ::selection { background: color-mix(in oklab, var(--color-accent) 35%, transparent); }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+  .recharts-responsive-container { min-height: 0 !important; }
+  .recharts-surface:focus, .recharts-wrapper:focus { outline: none; }
+  select option { background: var(--color-surface-secondary); color: var(--color-text-primary); }
+}
+
+@layer utilities {
+  .financial-positive { color: var(--color-positive); }
+  .financial-negative { color: var(--color-negative); }
+  .skeleton { border-radius: 10px; background: linear-gradient(100deg, var(--color-border-subtle) 30%, var(--color-border) 50%, var(--color-border-subtle) 70%); background-size: 200% 100%; animation: shimmer 1.4s linear infinite; }
+
+  /* ── surfaces ── */
+  .glass {
+    background: linear-gradient(150deg, color-mix(in oklab, var(--color-surface-secondary) 86%, transparent), color-mix(in oklab, var(--color-surface-secondary) 62%, transparent));
+    border: 1px solid var(--color-border);
+    -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%);
+    box-shadow: inset 0 1px 0 color-mix(in oklab, white 6%, transparent), 0 24px 48px -32px rgba(2, 8, 24, .55);
+  }
+  .glass-strong { background: color-mix(in oklab, var(--color-surface-secondary) 94%, transparent); -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px); border: 1px solid var(--color-border); }
+  .spot { position: relative; }
+  .spot::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity var(--motion-base);
+    background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 0%), color-mix(in oklab, var(--color-accent) 16%, transparent), transparent 62%);
+  }
+  .spot:hover::after { opacity: 1; }
+  .glow-hover { transition: box-shadow var(--motion-base), border-color var(--motion-base), transform var(--motion-base) var(--motion-ease); }
+  .glow-hover:hover { border-color: color-mix(in oklab, var(--color-accent) 55%, var(--color-border)); box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-accent) 25%, transparent), 0 18px 44px -18px var(--color-glow); }
+  .lift:hover { transform: translateY(-2px); }
+  .grad-border { position: relative; }
+  .grad-border::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, var(--color-accent), transparent 40%, var(--color-accent-2)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: .7; }
+
+  .text-gradient { background: linear-gradient(100deg, var(--color-accent), var(--color-accent-2) 60%, var(--color-accent)); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradient-shift 8s linear infinite; }
+  .bg-brand-gradient { background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2)); }
+  .glow-accent { box-shadow: 0 0 28px -6px var(--color-glow); }
+
+  /* ── ambient background ── */
+  .app-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .app-bg::before { content: ""; position: absolute; inset: -20%; background:
+      radial-gradient(40% 35% at 15% 10%, color-mix(in oklab, var(--color-accent) 18%, transparent), transparent 70%),
+      radial-gradient(35% 30% at 85% 15%, color-mix(in oklab, var(--color-accent-2) 20%, transparent), transparent 70%),
+      radial-gradient(45% 40% at 60% 100%, color-mix(in oklab, var(--color-accent) 10%, transparent), transparent 70%);
+    animation: aurora 26s ease-in-out infinite alternate; }
+  .app-bg::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--color-border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--color-border-subtle) 1px, transparent 1px); background-size: 56px 56px; opacity: .45; -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 72%); mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 72%); animation: grid-pan 40s linear infinite; }
+
+  /* ── motion ── */
+  .motion-page { animation: page-in var(--motion-panel) var(--motion-ease) both; }
+  .reveal { opacity: 0; animation: rise .65s var(--motion-ease) forwards; animation-delay: calc(var(--i, 0) * 70ms); }
+  .motion-kpi { animation: rise .6s var(--motion-ease) both; }
+  .motion-popover, [role="menu"] { transform-origin: top right; animation: pop var(--motion-fast) var(--motion-ease) both; }
+  .motion-dialog, [role="dialog"] { animation: dialog-in var(--motion-base) var(--motion-ease) both; }
+  .motion-overlay { animation: fade-in var(--motion-base) ease-out both; }
+  .motion-overlay-exit { animation: fade-out var(--motion-fast) ease-in both; }
+  .motion-dialog-exit { animation: dialog-out var(--motion-fast) ease-in both; }
+  .motion-message { animation: msg-in .35s var(--motion-ease) both; }
+  .slide-in-right { animation: slide-right .38s var(--motion-ease) both; }
+  .float { animation: float 6s ease-in-out infinite; }
+  .float-slow { animation: float 9s ease-in-out infinite reverse; }
+  .pulse-dot { position: relative; }
+  .pulse-dot::after { content: ""; position: absolute; inset: -4px; border-radius: 999px; border: 1.5px solid currentColor; opacity: 0; animation: ring 2s ease-out infinite; }
+  .orb { background: conic-gradient(from 0deg, var(--color-accent), var(--color-accent-2), var(--color-chart-2), var(--color-accent)); animation: spin 6s linear infinite; }
+  .scanline { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+  .scanline::after { content: ""; position: absolute; left: 0; right: 0; height: 40%; background: linear-gradient(transparent, color-mix(in oklab, var(--color-accent) 14%, transparent), transparent); animation: scan 4.5s ease-in-out infinite; }
+  .typing-dot { animation: bounce 1.1s ease-in-out infinite; }
+  .caret::after { content: "▍"; margin-left: 1px; color: var(--color-accent); animation: blink 1s steps(2) infinite; }
+  .marquee { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+  .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s var(--motion-ease) forwards; }
+  [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--motion-ease), transform .8s var(--motion-ease); transition-delay: calc(var(--i, 0) * 90ms); }
+  [data-reveal].is-visible { opacity: 1; transform: none; }
+  .heat-cell { opacity: 0; animation: fade-in .5s ease-out forwards; animation-delay: calc(var(--c, 0) * 14ms); }
+}
+
+@keyframes aurora { from { transform: translate3d(-2%, -1%, 0) scale(1); } to { transform: translate3d(3%, 2%, 0) scale(1.08); } }
+@keyframes grid-pan { to { background-position: 56px 56px, 56px 56px; } }
+@keyframes page-in { from { opacity: 0; transform: translateY(10px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(16px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: translateY(-4px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes dialog-in { from { opacity: 0; transform: translateY(12px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes dialog-out { to { opacity: 0; transform: translateY(6px) scale(.98); } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes msg-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes slide-right { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: none; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes ring { 0% { opacity: .7; transform: scale(.7); } 100% { opacity: 0; transform: scale(1.9); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes scan { 0%, 100% { transform: translateY(-120%); } 50% { transform: translateY(260%); } }
+@keyframes bounce { 0%, 80%, 100% { transform: translateY(0); opacity: .45; } 40% { transform: translateY(-5px); opacity: 1; } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@keyframes gradient-shift { to { background-position: 200% center; } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal, [data-reveal], .heat-cell { opacity: 1 !important; transform: none !important; }
+}

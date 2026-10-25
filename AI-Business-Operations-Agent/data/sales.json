@@ -1,0 +1,20 @@
+[
+  {
+    "product": "Laptop A",
+    "quantity": 5,
+    "price": 8000000,
+    "cost": 6500000
+  },
+  {
+    "product": "Laptop B",
+    "quantity": 3,
+    "price": 6500000,
+    "cost": 5000000
+  },
+  {
+    "product": "Laptop C",
+    "quantity": 8,
+    "price": 4500000,
+    "cost": 3200000
+  }
+]
